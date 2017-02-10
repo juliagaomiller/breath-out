@@ -8,12 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		A31E15741E4E1A60000D1EF5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31E15731E4E1A60000D1EF5 /* AppDelegate.swift */; };
-		A31E15761E4E1A60000D1EF5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31E15751E4E1A60000D1EF5 /* ViewController.swift */; };
 		A31E15791E4E1A60000D1EF5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A31E15771E4E1A60000D1EF5 /* Main.storyboard */; };
 		A31E157B1E4E1A60000D1EF5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A31E157A1E4E1A60000D1EF5 /* Assets.xcassets */; };
 		A31E157E1E4E1A60000D1EF5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A31E157C1E4E1A60000D1EF5 /* LaunchScreen.storyboard */; };
 		A31E15891E4E1A60000D1EF5 /* breath_outTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31E15881E4E1A60000D1EF5 /* breath_outTests.swift */; };
 		A31E15941E4E1A61000D1EF5 /* breath_outUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31E15931E4E1A61000D1EF5 /* breath_outUITests.swift */; };
+		A31E15A21E4E1AA8000D1EF5 /* BoxBreathingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31E15A11E4E1AA8000D1EF5 /* BoxBreathingVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +36,6 @@
 /* Begin PBXFileReference section */
 		A31E15701E4E1A60000D1EF5 /* breath-out.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "breath-out.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A31E15731E4E1A60000D1EF5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A31E15751E4E1A60000D1EF5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		A31E15781E4E1A60000D1EF5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A31E157A1E4E1A60000D1EF5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A31E157D1E4E1A60000D1EF5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -47,6 +46,7 @@
 		A31E158F1E4E1A61000D1EF5 /* breath-outUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "breath-outUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A31E15931E4E1A61000D1EF5 /* breath_outUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = breath_outUITests.swift; sourceTree = "<group>"; };
 		A31E15951E4E1A61000D1EF5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A31E15A11E4E1AA8000D1EF5 /* BoxBreathingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoxBreathingVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,7 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				A31E15731E4E1A60000D1EF5 /* AppDelegate.swift */,
-				A31E15751E4E1A60000D1EF5 /* ViewController.swift */,
+				A31E15A11E4E1AA8000D1EF5 /* BoxBreathingVC.swift */,
 				A31E15771E4E1A60000D1EF5 /* Main.storyboard */,
 				A31E157A1E4E1A60000D1EF5 /* Assets.xcassets */,
 				A31E157C1E4E1A60000D1EF5 /* LaunchScreen.storyboard */,
@@ -259,8 +259,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A31E15761E4E1A60000D1EF5 /* ViewController.swift in Sources */,
 				A31E15741E4E1A60000D1EF5 /* AppDelegate.swift in Sources */,
+				A31E15A21E4E1AA8000D1EF5 /* BoxBreathingVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

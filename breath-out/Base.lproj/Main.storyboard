@@ -1,26 +1,60 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11134" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Eac-gg-5qj">
+    <device id="retina5_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11106"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <!--Box BreathingVC-->
+        <scene sceneID="nc8-Gc-qvA">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Eac-gg-5qj" customClass="BoxBreathingVC" customModule="breath_out" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                        <viewControllerLayoutGuide type="top" id="JVl-zb-not"/>
+                        <viewControllerLayoutGuide type="bottom" id="eLs-Tw-6cu"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <view key="view" contentMode="scaleToFill" id="cpQ-iD-WdD">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="orb" translatesAutoresizingMaskIntoConstraints="NO" id="5mR-sT-kyB">
+                                <rect key="frame" x="-68" y="93" width="550" height="550"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="5mR-sT-kyB" secondAttribute="height" multiplier="1:1" id="92x-aO-JYA"/>
+                                    <constraint firstAttribute="width" constant="550" id="mmA-ci-eg2"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BREATH IN" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qRf-sw-OfQ">
+                                <rect key="frame" x="147" y="352" width="120.33333333333331" height="32.666666666666686"/>
+                                <fontDescription key="fontDescription" name="ChalkboardSE-Bold" family="Chalkboard SE" pointSize="23"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.1019607843" green="0.1333333333" blue="0.4549019608" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="5mR-sT-kyB" firstAttribute="centerX" secondItem="cpQ-iD-WdD" secondAttribute="centerX" id="7yK-d4-6w6"/>
+                            <constraint firstItem="qRf-sw-OfQ" firstAttribute="centerY" secondItem="cpQ-iD-WdD" secondAttribute="centerY" id="e1M-Kc-QAK"/>
+                            <constraint firstItem="5mR-sT-kyB" firstAttribute="centerY" secondItem="cpQ-iD-WdD" secondAttribute="centerY" id="k4B-W9-Ha6"/>
+                            <constraint firstItem="qRf-sw-OfQ" firstAttribute="centerX" secondItem="cpQ-iD-WdD" secondAttribute="centerX" id="wXY-SD-COn"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="breathLabel" destination="qRf-sw-OfQ" id="Cd1-ak-0t8"/>
+                        <outlet property="glowOrb" destination="5mR-sT-kyB" id="KVD-Xw-Lu0"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wph-rW-OJw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="143.19999999999999" y="121.88905547226388"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="orb" width="600" height="600"/>
+    </resources>
 </document>
