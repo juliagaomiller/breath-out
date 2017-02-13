@@ -8,51 +8,47 @@
 
 import UIKit
 
+let showText = "showText"
+let isBlackBackground = "isBlackBackground"
+let playMusic = "playMusic"
+let vibrationOn = "vibrationOn"
+
 class BoxBreathingVC: UIViewController {
-    
-    //PHOTOSHOP = MAKE APP ICON
-    //ILLUSTRATOR = CREATE MY LOGO
     
     @IBOutlet var breathLabel: UILabel!
     @IBOutlet var glowOrb: UIImageView!
     
-    let nightSky = UIColor(red:0.07, green:0.09, blue:0.32, alpha:1.0) //HEX: 1A2274
-    let skyBlue = UIColor.white
+    let darkColor = UIColor.black
+    let lightColor = UIColor.white
     
     var iterations = 0
     let iterationLimit = 2
     
     var nightMode = false
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        glowOrb.layer.cornerRadius = glowOrb.bounds.width / 2
+        setUpView()
         
-        breathLabel.textColor = UIColor.white
-        breathLabel.alpha = 0
-        breathLabel.text = "BREATH IN"
-        self.view.backgroundColor = skyBlue
+        checkForUserDefaultChanges()
         
-        if let dayTime = UserDefaults.standard.value(forKey: "dayTime") as? Bool{
-            if dayTime { self.view.backgroundColor = skyBlue }
-            else { self.view.backgroundColor = nightSky }
-        } else {
-            UserDefaults.standard.set(true, forKey: "dayTime")
-        }
+//        let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
+//        if launchedBefore  {
+//            breathLabel.isHidden = true
+//        } else {
+//            breathLabel.isHidden = false
+//            UserDefaults.standard.set(true, forKey: "launchedBefore")
+//        }
         
-        let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
-        if launchedBefore  {
-            breathLabel.isHidden = true
-        } else {
-            breathLabel.isHidden = false
-            UserDefaults.standard.set(true, forKey: "launchedBefore")
-        }
+//        let tap = UITapGestureRecognizer(target: self, action: #selector(switchMode))
+//        self.view.addGestureRecognizer(tap)
         
-        let tap = UITapGestureRecognizer(target: self, action: #selector(switchMode))
-        self.view.addGestureRecognizer(tap)
-
+        startAnimation()
+        
+    }
+    
+    func startAnimation(){
         //Circle starts small
         glowOrb.transform = CGAffineTransform(scaleX: 0.25, y: 0.25)
         
@@ -70,23 +66,80 @@ class BoxBreathingVC: UIViewController {
         }) { (finished) in
             self.contractCircle()
         }
+    }
+    
+    func setUpView(){
+        glowOrb.layer.cornerRadius = glowOrb.bounds.width / 2
+        glowOrb.layer.masksToBounds = true
+        
+        breathLabel.textColor = UIColor.white
+        breathLabel.alpha = 0
+        breathLabel.text = "BREATH IN"
+        self.view.backgroundColor = darkColor
+    }
+    
+    func checkForUserDefaultChanges(){
+        if let bool = UserDefaults.standard.value(forKey: isBlackBackground) != nil {
+            setBackground(isDark: bool)
+        } else {
+            UserDefaults.standard.set(true, forKey: isBlackBackground)
+        }
+        if UserDefaults.standard.value(forKey: showText) != nil {
+            
+        } else {
+            //set default
+        }
+        if UserDefaults.standard.value(forKey: vibrationOn) != nil {
+            
+        } else {
+            //set default
+        }
+        if UserDefaults.standard.value(forKey: playMusic) != nil {
+            
+        } else {
+            //set default
+        }
+    }
+    
+    func vibrateTwice(){
         
     }
     
-    func switchMode(){
-        if nightMode {
-            UserDefaults.standard.set(true, forKey: "dayTime")
+    func vibrateOnce(){
+        
+    }
+    
+    func countToFour(){
+        
+    }
+    
+    func setBackground(isDark: Bool){
+        if isDark {
             UIView.animate(withDuration: 4.0, animations: {
-                self.view.backgroundColor = self.skyBlue
+                self.view.backgroundColor = self.darkColor
             })
         } else {
-            UserDefaults.standard.set(false, forKey: "dayTime")
             UIView.animate(withDuration: 4.0, animations: {
-                self.view.backgroundColor = self.nightSky
+                self.view.backgroundColor = self.lightColor
             })
         }
-        nightMode = !nightMode
+        
     }
+    
+//    func switchMode(){
+//        if nightMode {
+//            UserDefaults.standard.set(true, forKey: "dayTime")
+//            UIView.animate(withDuration: 4.0, animations: {
+//                self.view.backgroundColor = self.lightColor
+//            })
+//        } else {
+//            UserDefaults.standard.set(false, forKey: "dayTime")
+//            UIView.animate(withDuration: 4.0, animations: {
+//                self.view.backgroundColor = self.darkColor
+//            })
+//        }
+//        nightMode = !nightMode
+//    }
     
     func contractCircle(){
         if iterations <= iterationLimit {
