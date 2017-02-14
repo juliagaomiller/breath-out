@@ -31,7 +31,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BREATH IN" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qRf-sw-OfQ">
-                                <rect key="frame" x="148" y="345" width="118" height="27"/>
+                                <rect key="frame" x="148" y="349.66666666666669" width="118" height="27"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -50,12 +50,12 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="5mR-sT-kyB" firstAttribute="centerX" secondItem="cpQ-iD-WdD" secondAttribute="centerX" id="7yK-d4-6w6"/>
                             <constraint firstItem="eLs-Tw-6cu" firstAttribute="top" secondItem="lrE-6B-iF2" secondAttribute="bottom" constant="5" id="TIc-jX-Pkm"/>
                             <constraint firstItem="lrE-6B-iF2" firstAttribute="centerX" secondItem="cpQ-iD-WdD" secondAttribute="centerX" id="Tq8-rb-ziF"/>
-                            <constraint firstItem="qRf-sw-OfQ" firstAttribute="centerY" secondItem="cpQ-iD-WdD" secondAttribute="centerY" constant="-10" id="e1M-Kc-QAK"/>
+                            <constraint firstItem="qRf-sw-OfQ" firstAttribute="centerY" secondItem="cpQ-iD-WdD" secondAttribute="centerY" constant="-5" id="e1M-Kc-QAK"/>
                             <constraint firstItem="5mR-sT-kyB" firstAttribute="centerY" secondItem="cpQ-iD-WdD" secondAttribute="centerY" id="k4B-W9-Ha6"/>
                             <constraint firstItem="qRf-sw-OfQ" firstAttribute="centerX" secondItem="cpQ-iD-WdD" secondAttribute="centerX" id="wXY-SD-COn"/>
                         </constraints>
@@ -134,7 +134,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3dv-Ly-nO4">
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="3dv-Ly-nO4">
                                                     <rect key="frame" x="347" y="6" width="51" height="31"/>
                                                 </switch>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SHOW TEXT: OFF" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OOx-Cd-qXf">
@@ -167,8 +167,8 @@
                                                     <rect key="frame" x="347" y="6" width="51" height="31"/>
                                                     <color key="onTintColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 </switch>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BACKGROUND COLOR: WHITE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RHc-0V-F8V">
-                                                    <rect key="frame" x="18" y="13.333333333333336" width="200.33333333333334" height="17"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BACKGROUND COLOR: BLACK" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RHc-0V-F8V">
+                                                    <rect key="frame" x="18" y="13.333333333333336" width="201" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -200,7 +200,7 @@
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3hC-gs-fOO">
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="3hC-gs-fOO">
                                                     <rect key="frame" x="347" y="6" width="51" height="31"/>
                                                 </switch>
                                             </subviews>
@@ -252,7 +252,7 @@
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9lm-Em-gYa">
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="9lm-Em-gYa">
                                                     <rect key="frame" x="347" y="6" width="51" height="31"/>
                                                 </switch>
                                             </subviews>

@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import AudioToolbox
 
 let showText = "showText"
-let isBlackBackground = "isBlackBackground"
+let isWhiteBackground = "isWhiteBackground"
 let playMusic = "playMusic"
 let vibrationOn = "vibrationOn"
 
@@ -20,51 +21,144 @@ class BoxBreathingVC: UIViewController {
     
     let darkColor = UIColor.black
     let lightColor = UIColor.white
-    
-    var iterations = 0
-    let iterationLimit = 2
-    
-    var nightMode = false
+
+    var vibrateOn = false
+    var showTextOn = true
+    var playMusicOn = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setUpView()
-        
-        checkForUserDefaultChanges()
-        
-//        let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
-//        if launchedBefore  {
-//            breathLabel.isHidden = true
-//        } else {
-//            breathLabel.isHidden = false
-//            UserDefaults.standard.set(true, forKey: "launchedBefore")
-//        }
-        
-//        let tap = UITapGestureRecognizer(target: self, action: #selector(switchMode))
-//        self.view.addGestureRecognizer(tap)
-        
         startAnimation()
+        checkForUserDefaultChanges()
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        checkForUserDefaultChanges()
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        vibrateOn = false
+    }
+    
     func startAnimation(){
-        //Circle starts small
+
         glowOrb.transform = CGAffineTransform(scaleX: 0.25, y: 0.25)
         
-        UIView.animate(withDuration: 1.5, delay: 1.0, animations: {
-            self.breathLabel.alpha = 1
-        }) { (finished) in
+        if showTextOn {
+            self.breathLabel.text = "BREATHE IN"
             UIView.animate(withDuration: 1.5, delay: 1.0, animations: {
-                self.breathLabel.alpha = 0
-            })
+                self.breathLabel.alpha = 1
+            }) { (finished) in
+                UIView.animate(withDuration: 1.5, delay: 1.0, animations: {
+                    self.breathLabel.alpha = 0
+                })
+            }
         }
-        iterations += 1
+        
         
         UIView.animate(withDuration: 4.0, delay: 1.0, animations: {
+
+            if self.vibrateOn { self.vibrateOnce()}
+            
             self.glowOrb.transform = CGAffineTransform.identity
         }) { (finished) in
             self.contractCircle()
+        }
+    }
+    
+    func checkForUserDefaultChanges(){
+        setBackground(isWhite: UserDefaults.standard.bool(forKey: isWhiteBackground))
+        showTextOn = UserDefaults.standard.bool(forKey: showText)
+        vibrateOn = UserDefaults.standard.bool(forKey: vibrationOn)
+        playMusicOn = UserDefaults.standard.bool(forKey: playMusic)
+    }
+    
+    func contractCircle(){
+        if showTextOn {
+          animateBreathLabel(breathText: "BREATHE OUT")
+        }
+        
+        performVibrations(on: vibrateOn)
+        
+        UIView.animate(withDuration: 4.0, delay: 4.0, options: .curveEaseInOut, animations: {
+            self.glowOrb.transform = CGAffineTransform(scaleX: 0.25, y: 0.25)
+        }) { (finished) in
+            self.expandCircle()
+        }
+    }
+    
+    
+    
+    func expandCircle(){
+        if showTextOn {
+            animateBreathLabel(breathText: "BREATHE IN")
+        }
+        
+        performVibrations(on: vibrateOn)
+        
+        UIView.animate(withDuration: 4.0, delay: 4.0, options: .curveEaseInOut, animations: {
+            self.glowOrb.transform = CGAffineTransform.identity
+        }) { (finished) in
+            self.contractCircle()
+        }
+        
+    }
+    
+    func performVibrations(on: Bool){
+        if on {
+            vibrateOnce()
+            let _ = Timer.scheduledTimer(timeInterval: 4.0, target: self, selector: #selector(vibrateTwice), userInfo: nil, repeats: false)
+        }
+        
+    }
+    
+    func vibrateTwice(){
+        vibrateOnce()
+        let _ = Timer.scheduledTimer(timeInterval: 0.6, target: self, selector: #selector(vibrateOnce), userInfo: nil, repeats: false)
+    }
+    
+    func vibrateOnce(){
+        AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
+    }
+    func setBackground(isWhite: Bool){
+        if isWhite {
+            UIView.animate(withDuration: 2.0, animations: {
+                self.view.backgroundColor = self.lightColor
+            })
+            
+        } else {
+            UIView.animate(withDuration: 2.0, animations: {
+                self.view.backgroundColor = self.darkColor
+                
+            })
+        }
+
+    }
+    
+    func animateBreathLabel(breathText: String){
+        breathLabel.alpha = 0
+        breathLabel.text = "HOLD"
+        UIView.animate(withDuration: 1.5, animations: {
+            self.breathLabel.alpha = 1
+        }) {(finished) in
+            UIView.animate(withDuration: 1.5, delay: 1.0, animations: {
+                self.breathLabel.alpha = 0
+            }) { (finished) in
+                self.breathLabel.text = breathText
+                UIView.animate(withDuration: 1.5, animations: {
+                    self.breathLabel.alpha = 1
+                }) {(finished) in
+                    UIView.animate(withDuration: 1.5, delay: 1.0, animations: {
+                        self.breathLabel.alpha = 0
+                    })
+                }
+            }
         }
     }
     
@@ -74,134 +168,7 @@ class BoxBreathingVC: UIViewController {
         
         breathLabel.textColor = UIColor.white
         breathLabel.alpha = 0
-        breathLabel.text = "BREATH IN"
-        self.view.backgroundColor = darkColor
-    }
-    
-    func checkForUserDefaultChanges(){
-        if let bool = UserDefaults.standard.value(forKey: isBlackBackground) != nil {
-            setBackground(isDark: bool)
-        } else {
-            UserDefaults.standard.set(true, forKey: isBlackBackground)
-        }
-        if UserDefaults.standard.value(forKey: showText) != nil {
-            
-        } else {
-            //set default
-        }
-        if UserDefaults.standard.value(forKey: vibrationOn) != nil {
-            
-        } else {
-            //set default
-        }
-        if UserDefaults.standard.value(forKey: playMusic) != nil {
-            
-        } else {
-            //set default
-        }
-    }
-    
-    func vibrateTwice(){
         
     }
-    
-    func vibrateOnce(){
-        
-    }
-    
-    func countToFour(){
-        
-    }
-    
-    func setBackground(isDark: Bool){
-        if isDark {
-            UIView.animate(withDuration: 4.0, animations: {
-                self.view.backgroundColor = self.darkColor
-            })
-        } else {
-            UIView.animate(withDuration: 4.0, animations: {
-                self.view.backgroundColor = self.lightColor
-            })
-        }
-        
-    }
-    
-//    func switchMode(){
-//        if nightMode {
-//            UserDefaults.standard.set(true, forKey: "dayTime")
-//            UIView.animate(withDuration: 4.0, animations: {
-//                self.view.backgroundColor = self.lightColor
-//            })
-//        } else {
-//            UserDefaults.standard.set(false, forKey: "dayTime")
-//            UIView.animate(withDuration: 4.0, animations: {
-//                self.view.backgroundColor = self.darkColor
-//            })
-//        }
-//        nightMode = !nightMode
-//    }
-    
-    func contractCircle(){
-        if iterations <= iterationLimit {
-            breathLabel.alpha = 0
-            breathLabel.text = "HOLD"
-            UIView.animate(withDuration: 1.5, animations: {
-                self.breathLabel.alpha = 1
-            }) {(finished) in
-                UIView.animate(withDuration: 1.5, delay: 1.0, animations: {
-                    self.breathLabel.alpha = 0
-                }) { (finished) in
-                    self.breathLabel.text = "BREATH OUT"
-                    UIView.animate(withDuration: 1.5, animations: {
-                        self.breathLabel.alpha = 1
-                    }) {(finished) in
-                        UIView.animate(withDuration: 1.5, delay: 1.0, animations: {
-                            self.breathLabel.alpha = 0
-                        })
-                    }
-                }
-            }
-        } else { breathLabel.isHidden = true}
-        UIView.animate(withDuration: 4.0, delay: 4.0, options: .curveEaseInOut, animations: {
-            self.glowOrb.transform = CGAffineTransform(scaleX: 0.25, y: 0.25)
-            self.breathLabel.alpha = 1
-        }) { (finished) in
-            self.breathLabel.alpha = 0
-            self.expandCircle()
-        }
-    }
-    
-    func expandCircle(){
-        breathLabel.alpha = 0
-        if iterations <= iterationLimit {
-            breathLabel.text = "HOLD"
-            UIView.animate(withDuration: 1.5, animations: {
-                self.breathLabel.alpha = 1
-            }) {(finished) in
-                UIView.animate(withDuration: 1.5, delay: 1.0, animations: {
-                    self.breathLabel.alpha = 0
-                }) { (finished) in
-                    self.breathLabel.text = "BREATH IN"
-                    UIView.animate(withDuration: 1.5, animations: {
-                        self.breathLabel.alpha = 1
-                    }) {(finished) in
-                        UIView.animate(withDuration: 1.5, delay: 1.0, animations: {
-                            self.breathLabel.alpha = 0
-                        })
-                    }
-                }
-            }
-            iterations += 1
-        } else { breathLabel.isHidden = true }
-        UIView.animate(withDuration: 4.0, delay: 4.0, options: .curveEaseInOut, animations: {
-            self.glowOrb.transform = CGAffineTransform.identity
-            self.breathLabel.alpha = 1
-        }) { (finished) in
-            self.breathLabel.alpha = 0
-            self.contractCircle()
-        }
-        
-    }
-    
     
 }

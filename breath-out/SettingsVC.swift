@@ -41,6 +41,11 @@ class SettingsVC: UIViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tableView.reloadData()
+    }
+    
     
     func setUpTableView(){
         tableView.dataSource = self
@@ -107,6 +112,3 @@ extension SettingsVC: UITableViewDataSource, UITableViewDelegate {
     
 }
 
-extension SettingsVC {
-    
-}
