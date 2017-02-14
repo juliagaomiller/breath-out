@@ -18,10 +18,10 @@ class SwitchCell: UITableViewCell {
         print("background changed")
         if mySwitch.isOn {
             UserDefaults.standard.set(false, forKey: isWhiteBackground)
-            label.text = "BACKGROUND COLOR: BLACK"
+            label.text = "Dark Mode"
         } else {
             UserDefaults.standard.set(true, forKey: isWhiteBackground)
-            label.text = "BACKGROUND COLOR: WHITE"
+            label.text = "Light Mode"
         }
         
     }
@@ -29,20 +29,20 @@ class SwitchCell: UITableViewCell {
     func showTextChanged(mySwitch: UISwitch){
         if mySwitch.isOn {
             UserDefaults.standard.set(true, forKey: showText)
-            label.text = "SHOW TEXT: ON"
+//            label.text = "SHOW TEXT: ON"
         } else {
             UserDefaults.standard.set(false, forKey: showText)
-            label.text = "SHOW TEXT: OFF"
+//            label.text = "SHOW TEXT: OFF"
         }
     }
     
     func vibrateChanged(mySwitch: UISwitch){
         if mySwitch.isOn {
             UserDefaults.standard.set(true, forKey: vibrationOn)
-            label.text = "VIBRATION MODE: ON"
+//            label.text = "VIBRATION MODE: ON"
         } else {
             UserDefaults.standard.set(false, forKey: vibrationOn)
-            label.text = "VIBRATION MODE: OFF"
+//            label.text = "VIBRATION MODE: OFF"
         }
     }
     
@@ -64,18 +64,20 @@ class SwitchCell: UITableViewCell {
             switchButton.addTarget(self, action: #selector(backgroundChanged(mySwitch:)), for: .valueChanged)
             let isBlack = !(UserDefaults.standard.bool(forKey: isWhiteBackground))
             switchButton.setOn(isBlack, animated: false)
-            label.text = (isBlack) ? "BACKGROUND COLOR: BLACK" : "BACKGROUND COLOR: WHITE"
+            label.text = (isBlack) ? "Dark Mode" : "Light Mode"
         case .showText:
             switchButton.addTarget(self, action: #selector(showTextChanged(mySwitch:)), for: .valueChanged)
             let showTextOn = UserDefaults.standard.bool(forKey: showText)
             switchButton.setOn(showTextOn, animated: false)
-            label.text = (showTextOn) ? "SHOW TEXT: ON" : "SHOW TEXT: OFF"
+            label.text = "Show Text"
+//            label.text = (showTextOn) ? "SHOW TEXT: ON" : "SHOW TEXT: OFF"
             break
         case .buzz:
             switchButton.addTarget(self, action: #selector(vibrateChanged(mySwitch:)), for: .valueChanged)
             let vibrateOn = (UserDefaults.standard.bool(forKey: vibrationOn))
             switchButton.setOn(vibrateOn, animated: false)
-            label.text = (vibrateOn) ? "VIBRATION MODE: ON" : "VIBRATION MODE: OFF"
+            label.text = "Vibration Mode"
+//            label.text = (vibrateOn) ? "VIBRATION MODE: ON" : "VIBRATION MODE: OFF"
 
             break
         default:
