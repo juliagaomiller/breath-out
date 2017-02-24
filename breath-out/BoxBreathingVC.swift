@@ -18,6 +18,7 @@ class BoxBreathingVC: UIViewController {
     
     @IBOutlet var breathLabel: UILabel!
     @IBOutlet var glowOrb: UIImageView!
+    @IBOutlet var timerLabel: UILabel!
     
     let darkColor = UIColor.black
     let lightColor = UIColor.white
@@ -25,9 +26,15 @@ class BoxBreathingVC: UIViewController {
     var vibrateOn = false
     var showTextOn = true
     var playMusicOn = false
+    var timerOn = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        UIApplication.shared.isIdleTimerDisabled = true
+//        timerSeconds = 0
+        
+        timerLabel.isHidden = true
         
         setUpView()
         startAnimation()
@@ -37,7 +44,6 @@ class BoxBreathingVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        
         checkForUserDefaultChanges()
         
     }
@@ -45,6 +51,14 @@ class BoxBreathingVC: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         vibrateOn = false
     }
+    
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewDidAppear(true)
+////        print(timerSeconds)
+////        if timerSeconds != 0 {
+////            startTimer(seconds: timerSeconds)
+////        }
+//    }
     
     func startAnimation(){
 
@@ -72,7 +86,53 @@ class BoxBreathingVC: UIViewController {
         }
     }
     
+    func startTimer(seconds: Int){
+        timerLabel.isHidden = false
+        let _ = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
+    }
+    
+    func convertSecondsToTime(seconds: Int)->String{
+        if seconds > 59 {
+            let minutes = seconds / 60
+            let secondsLeft = seconds % 60
+            if secondsLeft < 10 {
+                return "\(minutes):0\(secondsLeft)"
+            } else {
+                return "\(minutes):\(secondsLeft)"
+            }
+            
+        } else {
+            return "0:\(seconds)"
+        }
+    }
+    
+    func sendAlert(message: String){
+        let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func updateTimer(){
+        if timerSeconds > 0 {
+            timerLabel.text = convertSecondsToTime(seconds: timerSeconds)
+            timerSeconds -= 1
+        } else {
+            if timerOn {
+                timerLabel.isHidden = true
+                sendAlert(message: "Timer Done!")
+                vibrateTwice()
+                timerOn = false
+            }
+            
+        }
+    }
+    
     func checkForUserDefaultChanges(){
+        
+        if timerSeconds != 0 {
+            timerOn = true
+        } else {timerOn = false}
+    
         setBackground(isWhite: UserDefaults.standard.bool(forKey: isWhiteBackground))
         showTextOn = UserDefaults.standard.bool(forKey: showText)
         vibrateOn = UserDefaults.standard.bool(forKey: vibrationOn)
@@ -80,6 +140,14 @@ class BoxBreathingVC: UIViewController {
     }
     
     func contractCircle(){
+//        print(timerSeconds)
+        if timerOn {
+            startTimer(seconds: timerSeconds)
+        }
+//        if timerSeconds != 0 {
+//            
+//        }
+//        
         if showTextOn {
           animateBreathLabel(breathText: "BREATHE OUT")
         }
@@ -96,6 +164,13 @@ class BoxBreathingVC: UIViewController {
     
     
     func expandCircle(){
+        if timerOn {
+            startTimer(seconds: timerSeconds)
+        }
+//        if timerSeconds != 0 {
+//            startTimer(seconds: timerSeconds)
+//        }
+        
         if showTextOn {
             animateBreathLabel(breathText: "BREATHE IN")
         }
@@ -113,7 +188,7 @@ class BoxBreathingVC: UIViewController {
     func performVibrations(on: Bool){
         if on {
             vibrateOnce()
-            let _ = Timer.scheduledTimer(timeInterval: 4.0, target: self, selector: #selector(vibrateTwice), userInfo: nil, repeats: false)
+//            let _ = Timer.scheduledTimer(timeInterval: 4.0, target: self, selector: #selector(vibrateTwice), userInfo: nil, repeats: false)
         }
         
     }

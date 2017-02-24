@@ -16,6 +16,7 @@
 		A31E15A21E4E1AA8000D1EF5 /* BoxBreathingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31E15A11E4E1AA8000D1EF5 /* BoxBreathingVC.swift */; };
 		A32624C01E523188009DB121 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32624BF1E523188009DB121 /* SettingsVC.swift */; };
 		A32624C21E525101009DB121 /* SwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32624C11E525101009DB121 /* SwitchCell.swift */; };
+		A36CADB11E609E3F00C8BDDC /* TimerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36CADB01E609E3F00C8BDDC /* TimerCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		A31E15A11E4E1AA8000D1EF5 /* BoxBreathingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoxBreathingVC.swift; sourceTree = "<group>"; };
 		A32624BF1E523188009DB121 /* SettingsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		A32624C11E525101009DB121 /* SwitchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchCell.swift; sourceTree = "<group>"; };
+		A36CADB01E609E3F00C8BDDC /* TimerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 				A31E15731E4E1A60000D1EF5 /* AppDelegate.swift */,
 				A31E15771E4E1A60000D1EF5 /* Main.storyboard */,
 				A32624C11E525101009DB121 /* SwitchCell.swift */,
+				A36CADB01E609E3F00C8BDDC /* TimerCell.swift */,
 				A31E15A11E4E1AA8000D1EF5 /* BoxBreathingVC.swift */,
 				A32624BF1E523188009DB121 /* SettingsVC.swift */,
 				A31E157A1E4E1A60000D1EF5 /* Assets.xcassets */,
@@ -270,6 +273,7 @@
 				A32624C21E525101009DB121 /* SwitchCell.swift in Sources */,
 				A31E15A21E4E1AA8000D1EF5 /* BoxBreathingVC.swift in Sources */,
 				A32624C01E523188009DB121 /* SettingsVC.swift in Sources */,
+				A36CADB11E609E3F00C8BDDC /* TimerCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
