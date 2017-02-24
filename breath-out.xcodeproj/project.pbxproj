@@ -104,13 +104,13 @@
 			isa = PBXGroup;
 			children = (
 				A31E15731E4E1A60000D1EF5 /* AppDelegate.swift */,
-				A31E15771E4E1A60000D1EF5 /* Main.storyboard */,
 				A32624C11E525101009DB121 /* SwitchCell.swift */,
 				A36CADB01E609E3F00C8BDDC /* TimerCell.swift */,
+				A31E15771E4E1A60000D1EF5 /* Main.storyboard */,
+				A31E157C1E4E1A60000D1EF5 /* LaunchScreen.storyboard */,
 				A31E15A11E4E1AA8000D1EF5 /* BoxBreathingVC.swift */,
 				A32624BF1E523188009DB121 /* SettingsVC.swift */,
 				A31E157A1E4E1A60000D1EF5 /* Assets.xcassets */,
-				A31E157C1E4E1A60000D1EF5 /* LaunchScreen.storyboard */,
 				A31E157F1E4E1A60000D1EF5 /* Info.plist */,
 			);
 			path = "breath-out";

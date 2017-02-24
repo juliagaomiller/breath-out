@@ -40,6 +40,8 @@ class SettingsVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+//        timerSeconds = 0
+//        timerMinutes = 0
         fillMinutesArray()
         
         timePickerView.isHidden = true
@@ -82,10 +84,6 @@ class SettingsVC: UIViewController {
         addCellToArray(withIdentifier: .buzz)
         addCellToArray(withIdentifier: .buzzInfo)
         addCellToArray(withIdentifier: .timer)
-//        addCellToArray(withIdentifier: .musicSwitch)
-//        addCellToArray(withIdentifier: .track)
-//        addCellToArray(withIdentifier: .feedback)
-//        addCellToArray(withIdentifier: .powLabs)
         
         self.tableView.reloadData()
         
@@ -100,8 +98,8 @@ class SettingsVC: UIViewController {
         } else if id == .timer {
             let cell = tableView.dequeueReusableCell(withIdentifier: id.rawValue) as! TimerCell
             if timerMinutes != 0 {
-                cell.label.text = "TIMER SET: \(timerMinutes) MIN"
-            } else { cell.label.text = "SET TIMER" }
+                cell.label.text = "Time Set: \(timerMinutes) min"
+            } else { cell.label.text = "Set a Timer" }
             cellArray.append(cell)
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: id.rawValue)!
@@ -111,9 +109,17 @@ class SettingsVC: UIViewController {
     
     func animatePickerView(){
         if timePickerView.isHidden {
-            
+            timePickerView.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
+            timePickerView.alpha = 0
+            UIView.animate(withDuration: 0.4, animations: { 
+                self.timePickerView.transform = CGAffineTransform.identity
+                self.timePickerView.alpha = 1
+            })
         } else {
-            
+            UIView.animate(withDuration: 0.4, animations: { 
+                self.timePickerView.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
+                self.timePickerView.alpha = 0
+            })
         }
     }
     
@@ -121,28 +127,27 @@ class SettingsVC: UIViewController {
         timerMinutes = 0
         timerSeconds = 0
                 let cell = cellArray[6] as! TimerCell
-        cell.label.text = "SET TIMER"
+        cell.label.text = "Set a Timer"
         cellArray[6] = cell
         
+        animatePickerView()
         timePickerView.isHidden = true
     }
     
     @IBAction func begin(){
         let cell = cellArray[6] as! TimerCell
-        print(timerMinutes)
-        cell.label.text = "TIMER SET: \(timerMinutes) MIN"
+        cell.label.text = "Timer Set: \(timerMinutes) min"
         cellArray[6] = cell
+        animatePickerView()
         timePickerView.isHidden = true
         tableView.reloadData()
     }
     
     func showPickerView(){
         timerMinutes = 1
+        animatePickerView()
         timePickerView.isHidden = false
-//        print(timePickerView.isHidden)
         pickerView.reloadAllComponents()
-        
-        //and action to button
     }
     
     func fillMinutesArray() {
@@ -155,7 +160,6 @@ class SettingsVC: UIViewController {
     
     
     @IBAction func back(){
-        print("timer seconds", timerSeconds)
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -182,10 +186,7 @@ extension SettingsVC: UIPickerViewDelegate, UIPickerViewDataSource {
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         timerMinutes = minutesArray[row]
-//        print(timerMinutes)
         timerSeconds = timerMinutes * 60
-        print("timer minutes", timerMinutes)
-        print("timer seconds", timerSeconds)
     }
     
 }

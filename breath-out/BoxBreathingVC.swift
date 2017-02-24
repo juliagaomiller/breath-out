@@ -20,6 +20,8 @@ class BoxBreathingVC: UIViewController {
     @IBOutlet var glowOrb: UIImageView!
     @IBOutlet var timerLabel: UILabel!
     
+    var myTimer: Timer?
+    
     let darkColor = UIColor.black
     let lightColor = UIColor.white
 
@@ -30,10 +32,10 @@ class BoxBreathingVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = UIColor.white
+        setBackground(isWhite: false)
         
         UIApplication.shared.isIdleTimerDisabled = true
-//        timerSeconds = 0
-        
         timerLabel.isHidden = true
         
         setUpView()
@@ -48,17 +50,26 @@ class BoxBreathingVC: UIViewController {
         
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        vibrateOn = false
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        if timerOn && myTimer == nil {
+            startTimer(seconds: timerSeconds)
+        } else {
+            timerLabel.isHidden = true
+        }
+        
     }
     
-//    override func viewDidAppear(_ animated: Bool) {
-//        super.viewDidAppear(true)
-////        print(timerSeconds)
-////        if timerSeconds != 0 {
-////            startTimer(seconds: timerSeconds)
-////        }
-//    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        timerLabel.isHidden = true
+        vibrateOn = false
+        timerOn = false
+        
+        if let _ = myTimer {
+            myTimer?.invalidate()
+            myTimer = nil
+        }
+    }
     
     func startAnimation(){
 
@@ -88,7 +99,7 @@ class BoxBreathingVC: UIViewController {
     
     func startTimer(seconds: Int){
         timerLabel.isHidden = false
-        let _ = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
+        myTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
     }
     
     func convertSecondsToTime(seconds: Int)->String{
@@ -119,8 +130,14 @@ class BoxBreathingVC: UIViewController {
         } else {
             if timerOn {
                 timerLabel.isHidden = true
-                sendAlert(message: "Timer Done!")
+                if timerMinutes == 1 {
+                    sendAlert(message: "\(timerMinutes) minute is up!")
+                } else {
+                    sendAlert(message: "\(timerMinutes) minutes is up!")
+                }
+                
                 vibrateTwice()
+                timerMinutes = 0
                 timerOn = false
             }
             
@@ -140,14 +157,10 @@ class BoxBreathingVC: UIViewController {
     }
     
     func contractCircle(){
-//        print(timerSeconds)
-        if timerOn {
-            startTimer(seconds: timerSeconds)
-        }
-//        if timerSeconds != 0 {
-//            
+//        if timerOn {
+//            startTimer(seconds: timerSeconds)
 //        }
-//        
+        
         if showTextOn {
           animateBreathLabel(breathText: "BREATHE OUT")
         }
@@ -164,13 +177,10 @@ class BoxBreathingVC: UIViewController {
     
     
     func expandCircle(){
-        if timerOn {
-            startTimer(seconds: timerSeconds)
-        }
-//        if timerSeconds != 0 {
+//        if timerOn {
 //            startTimer(seconds: timerSeconds)
 //        }
-        
+//        
         if showTextOn {
             animateBreathLabel(breathText: "BREATHE IN")
         }
